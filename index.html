@@ -15,11 +15,10 @@
       document.getElementById("butt").addEventListener("click", generateFile)
 
       function generateFile() {
-        var from = document.getElementById("from").value
-        var to = document.getElementById("to").value
+        var from = parseInt(document.getElementById("from").value, 10)
+        var to = parseInt(document.getElementById("to").value, 10)
         var filename = document.getElementById("filename").value
-        var primelist = primes(from, to)
-        var text = "this is a test\nof things"
+        var text = primes(from, to).join("\n")
         download(filename, text)
       }
 
@@ -31,23 +30,20 @@
             if (j >= from) { bools[j - from] = false }
           }
         }
-        var primes = []
+        var primearray = []
         for (var i = 0; i < bools.length; i++) {
-          if (bools[i]) { primes.push(i + from) }
+          if (bools[i]) { primearray.push(i + from) }
         }
-        return primes
+        return primearray
       }
 
       function download(filename, text) {
         var element = document.createElement('a');
         element.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(text));
         element.setAttribute('download', filename);
-
         element.style.display = 'none';
         document.body.appendChild(element);
-
         element.click();
-
         document.body.removeChild(element);
       }
 
