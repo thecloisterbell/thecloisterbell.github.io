@@ -19,7 +19,8 @@ Hello world
         var from = document.getElementById("from").value
         var to = document.getElementById("to").value
         var filename = document.getElementById("filename").value
-        var text = primes(from, to).join("\n")
+        var primelist = primes(from, to)
+        var text = primelist.join("\n")
         download(filename, text)
       }
 
