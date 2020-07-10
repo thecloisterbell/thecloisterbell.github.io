@@ -1,1 +1,56 @@
 Hello world
+<<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+  </head>
+  <body>
+    Generate all the prime numbers from <input type="number" id="from" value="1"/> to <input type="number" id="to" value="1000"/>
+    <br>
+    <input type="text" id="filename" value="primes.txt">
+    <br>
+    <button type="button" id="butt">Generate file</button>
+    <br>
+    <script type="text/javascript">
+      document.getElementById("butt").addEventListener("click", generateFile)
+
+      function generateFile() {
+        var from = document.getElementById("from").value
+        var to = document.getElementById("to").value
+        var filename = document.getElementById("filename").value
+        var text = primes(from, to).join("\n")
+        download(filename, text)
+      }
+
+      function primes(from, to) {
+        if (from < 2) { from = 2 }
+        var bools = Array(to + 1 - from).fill(true)
+        for (var i = 2; 2*i <= to; i++) {
+          for (var j = 2*i; j <= to; j += i) {
+            if (j >= from) { bools[j - from] = false }
+          }
+        }
+        var primes = []
+        for (var i = 0; i < bools.length; i++) {
+          if (bools[i]) { primes.push(i + from) }
+        }
+        return primes
+      }
+
+      function download(filename, text) {
+        var element = document.createElement('a');
+        element.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(text));
+        element.setAttribute('download', filename);
+
+        element.style.display = 'none';
+        document.body.appendChild(element);
+
+        element.click();
+
+        document.body.removeChild(element);
+      }
+
+    </script>
+  </body>
+</html>
