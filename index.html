@@ -5,12 +5,12 @@
     <title></title>
   </head>
   <body>
-    Generate all the prime numbers from <input type="number" id="from" value="1"/> to <input type="number" id="to" value="1000"/>
-    <br>
-    <input type="text" id="filename" value="primes.txt">
-    <br>
+    Generate all the prime numbers from <input type="number" id="from" value="1" width="10"/> to <input type="number" id="to" value="1000" width = "10"/>
+    <br><br>
+    and save them to <input type="text" id="filename" value="primes.txt">
+    <br><br>
     <button type="button" id="butt">Generate file</button>
-    <br>
+    <br><br>
     <script type="text/javascript">
       document.getElementById("butt").addEventListener("click", generateFile)
 
@@ -24,7 +24,7 @@
 
       function primes(from, to) {
         if (from < 2) { from = 2 }
-        var bools = Array(to + 1 - from).fill(true)
+        var bools = to < from ? [] : Array(to + 1 - from).fill(true)
         for (var i = 2; 2*i <= to; i++) {
           for (var j = 2*i; j <= to; j += i) {
             if (j >= from) { bools[j - from] = false }
