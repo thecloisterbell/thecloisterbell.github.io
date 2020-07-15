@@ -5,7 +5,7 @@
     <title></title>
   </head>
   <body>
-    Generate all the prime numbers from <input type="number" id="from" value="1" width="10"/> to <input type="number" id="to" value="1000" width = "10"/>
+    Generate all the prime numbers from <input type="number" id="from" value="1" size="10"/> to <input type="number" id="to" value="1000" size = "10"/>
     <br><br>
     and save them to <input type="text" id="filename" value="primes.txt">
     <br><br>
@@ -15,30 +15,30 @@
       document.getElementById("butt").addEventListener("click", generateFile)
 
       function generateFile() {
-        var from = parseInt(document.getElementById("from").value, 10)
-        var to = parseInt(document.getElementById("to").value, 10)
-        var filename = document.getElementById("filename").value
-        var text = primes(from, to).join("\n")
+        const from = parseInt(document.getElementById("from").value, 10)
+        const to = parseInt(document.getElementById("to").value, 10)
+        const filename = document.getElementById("filename").value
+        const text = primes(from, to).join("\n")
         download(filename, text)
       }
 
       function primes(from, to) {
         if (from < 2) { from = 2 }
-        var bools = to < from ? [] : Array(to + 1 - from).fill(true)
-        for (var i = 2; 2*i <= to; i++) {
-          for (var j = 2*i; j <= to; j += i) {
+        const bools = to < from ? [] : Array(to + 1 - from).fill(true)
+        for (let i = 2; 2*i <= to; i++) {
+          for (let j = 2*i; j <= to; j += i) {
             if (j >= from) { bools[j - from] = false }
           }
         }
-        var primearray = []
-        for (var i = 0; i < bools.length; i++) {
+        const primearray = []
+        for (let i = 0; i < bools.length; i++) {
           if (bools[i]) { primearray.push(i + from) }
         }
         return primearray
       }
 
       function download(filename, text) {
-        var element = document.createElement('a');
+        const element = document.createElement('a');
         element.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(text));
         element.setAttribute('download', filename);
         element.style.display = 'none';
